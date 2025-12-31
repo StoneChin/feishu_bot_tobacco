@@ -8,10 +8,10 @@ on:
     branches:
       - main
 
-  schedule:
-    # GitHub Actions 的 cron 是按 UTC 解释的 :contentReference[oaicite:3]{index=3}
-    # 例如：每天北京时间 09:00 = UTC 01:00
-    - cron: '13,14,15 * * * *'
+  # schedule:
+  #   # GitHub Actions 的 cron 是按 UTC 解释的 :contentReference[oaicite:3]{index=3}
+  #   # 例如：每天北京时间 09:00 = UTC 01:00
+  #   - cron: '13,14,15 * * * *'
 
 concurrency:
   group: tobacco-feishu
