@@ -1,0 +1,32 @@
+name: Tobacco notices -> Feishu
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions 的 cron 是按 UTC 解释的 :contentReference[oaicite:3]{index=3}
+    # 例如：每天北京时间 09:00 = UTC 01:00
+    - cron: '55,56,57,58 * * * *'
+
+concurrency:
+  group: tobacco-feishu
+  cancel-in-progress: true
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Fetch & push
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+        run: python tobacco_push.py
