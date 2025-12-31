@@ -1,7 +1,13 @@
 name: Tobacco notices -> Feishu
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
   schedule:
     # GitHub Actions 的 cron 是按 UTC 解释的 :contentReference[oaicite:3]{index=3}
     # 例如：每天北京时间 09:00 = UTC 01:00
